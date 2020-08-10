@@ -68,7 +68,6 @@ const TeacherList = () => {
           <button type="submit">Buscar</button>
         </form>
       </PageHeader>
-
       <main>
         {teachers.map((teacher: Teacher) => (
           <TeacherItem key={teacher.id} teacher={teacher} />

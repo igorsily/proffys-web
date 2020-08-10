@@ -2,6 +2,8 @@ import React, { FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import warningIcon from "../../assets/images/icons/warning.svg";
 import Input from "../../components/Input";
+import InputCellphone from "../../components/InputCellphone";
+import InputPrice from "../../components/InputPrince";
 import PageHeader from "../../components/PageHeader";
 import Select from "../../components/Select";
 import Textarea from "../../components/TextArea";
@@ -34,14 +36,13 @@ const TeacherForm = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     const data = {
       name,
       avatar,
-      whatsapp,
+      whatsapp: whatsapp.replace(/([\u0300-\u036f]|[^0-9])/g, ""),
       bio,
       subject,
-      cost,
+      cost: cost.replace(/([\u0300-\u036f]|[^0-9])/g, ""),
       schedule: scheduleItems,
     };
     await api.post("classes", data);
@@ -83,7 +84,7 @@ const TeacherForm = () => {
               value={avatar}
               onChange={(e) => setAvatar(e.target.value)}
             />
-            <Input
+            <InputCellphone
               name="wp"
               label="WhastApp"
               value={whatsapp}
@@ -108,7 +109,7 @@ const TeacherForm = () => {
                 { value: "Geografia", label: "Geografia" },
               ]}
             />
-            <Input
+            <InputPrice
               name="cost"
               label="Custo da sua hora por aula"
               value={cost}
